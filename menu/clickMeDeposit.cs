@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class clickMe : MonoBehaviour {
+public class clickMeDeposit : MonoBehaviour {
 
-	public Button button1;
+	public Button button2;
 	public bankAcct ba;
 
 	public void Start ()
 	{
-		Button b2 = button1.GetComponent<Button> ();
+		Button b2 = button2.GetComponent<Button> ();
 		b2.onClick.AddListener (FuckMe);
 
 	}
@@ -26,10 +26,12 @@ public class clickMe : MonoBehaviour {
 	IEnumerator ChangeTheText () 
 	{
 
-		const string URL = "http://api.reimaginebanking.com/accounts/58e9b1e7ceb8abe24250bde7";
+		const string URL = "http://api.reimaginebanking.com/accounts/58e9b1e7ceb8abe24250bde7/deposits";
 		string urlParameters = "?key=bb90ff71e2f3e4089a2706b77b15ae01";
-
-		using (UnityWebRequest www = UnityWebRequest.Get(URL + urlParameters))
+		WWWForm form = new WWWForm ();
+		form.AddField ("medium", "balance");
+		form.AddField ("amount", "20.05");
+		using (UnityWebRequest www = UnityWebRequest.Post(URL + urlParameters, form))
 		{
 			yield return www.Send();
 
@@ -40,33 +42,21 @@ public class clickMe : MonoBehaviour {
 			else
 			{
 				// Show results as text
-				Debug.Log(www.downloadHandler.text);
+				Debug.Log("Deposit of $5 complete!");
 				//Set shit equal to shit here
 
-				/*
-				Dictionary<string,string> values = new Dictionary<string, string>() {
-					{"_id", "hello" },
-					{"type", "hello" },
-					{"nickname", "hello" },
-					{"rewards", "0" },
-					{"balance", "0" },
-					{"customer_id", "hello" }
+				//ba = bankAcct.CreateFromJSON (www.downloadHandler.text);
 
-				};
-				values = JsonUtility.FromJson<Dictionary<string,string>> (www.downloadHandler.text);
-			*/
-				ba = bankAcct.CreateFromJSON (www.downloadHandler.text);
-
-				button1.GetComponentInChildren<Text> ().text = ba.getBalance().ToString();
+				//button1.GetComponentInChildren<Text> ().text = ba.getBalance().ToString();
 			}
 		}
 	}
 
-	
+
 	// Update is called once per frame
 
 }
-
+/*
 public class bankAcct
 {
 	public string _id;
@@ -90,3 +80,4 @@ public class bankAcct
 	// this example will return a PlayerInfo object with
 	// name == "Dr Charles", lives == 3, and health == 0.8f.
 }
+*/
