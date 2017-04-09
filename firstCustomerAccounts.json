@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "58e98d2ca73e4942cdafd3e2",
+    "type": "Credit Card",
+    "nickname": "Andreane's Account",
+    "rewards": 33835,
+    "balance": 12177,
+    "customer_id": "58e98d2aa73e4942cdafd3df"
+  },
+  {
+    "_id": "58e98d2ca73e4942cdafd3e3",
+    "type": "Savings",
+    "nickname": "Rolando's Account",
+    "rewards": 39081,
+    "balance": 27963,
+    "customer_id": "58e98d2aa73e4942cdafd3df"
+  }
+]
